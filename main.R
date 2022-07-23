@@ -26,7 +26,7 @@ data <- read_data(setting, paste("data_full.csv", sep=""))
 stan <- stan_model(file="util/proposed.stan")
 
 # Run the MCMC to estimate model parameters.
-fit <- sampling(stan, data=data, iter=3000, warmup=2000, chains=3)
+fit <- sampling(stan, data=data, iter=5000, warmup=2000, chains=3, control = list(adapt_delta = 0.98))
 
 # Get the EAP estimates for all the parameters.
 param <- get_estimates(fit, setting)
